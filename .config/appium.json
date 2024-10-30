@@ -1,0 +1,10 @@
+{
+  "hostname": "10.11.10.105",
+  "path": "/",
+  "port": 4723,
+  "logLevel": "error",
+  "timeout": 10,
+  "headless": false,
+  "usePreinstalledWDA": true,
+  "videoPath": "./reports"
+}
