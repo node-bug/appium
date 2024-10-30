@@ -1,0 +1,7 @@
+{
+  "platform": "iOS",
+  "platformVersion": "17.5",
+  "deviceName": "iPhone 12",
+  "automationName": "XCUITest",
+  "app": "/Users/thomasdsilva/Library/Developer/Xcode/DerivedData/Build/Products/Test-iphonesimulator/xyz.app"
+}

@@ -1,0 +1,12 @@
+.config
+.vscode
+logs
+node_modules
+.eslintrc
+.gitignore
+.npmignore
+.prettierrc
+package-lock.json
+reports/*
+.DS_Store
+.idea/

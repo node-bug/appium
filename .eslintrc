@@ -1,0 +1,35 @@
+{
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["prettier"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "prettier/prettier": ["error"],
+    "linebreak-style": ["error", "unix"],
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allowAfterThis": true
+      }
+    ],
+    "max-len": [
+      "error",
+      {
+        "code": 165,
+        "comments": 180
+      }
+    ],
+    "func-names": "off"
+  }
+}

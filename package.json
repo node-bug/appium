@@ -1,0 +1,57 @@
+{
+  "name": "@nodebug/appium",
+  "version": "0.1.4",
+  "author": {
+    "name": "Node Bug",
+    "email": "nodebug@outlook.com"
+  },
+  "bugs": {
+    "url": "https://github.com/node-bug/appium/issues"
+  },
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "dependencies": {
+    "@nodebug/config": "2.1.0",
+    "@nodebug/logger": "1.1.0",
+    "webdriver": "^9.9.0"
+  },
+  "description": "Appium for testing",
+  "homepage": "https://github.com/node-bug/appium#readme",
+  "keywords": [
+    "node",
+    "npm",
+    "appium"
+  ],
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/node-bug/appium.git"
+  },
+  "scripts": {
+    "test": "npm run test"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.1.3",
+    "husky": "^4.3.8",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{json,yaml,yml,md,sh,groovy}": [
+      "prettier --write"
+    ]
+  }
+}
