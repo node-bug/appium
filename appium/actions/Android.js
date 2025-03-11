@@ -1,36 +1,36 @@
-const ActionsBase = require('./ActionsBase');
+const ActionsBase = require('./ActionsBase')
 
 class Android extends ActionsBase {
     async activate(appId) {
-        return this.driver.executeScript('mobile: activateApp', { appId });
+        return this.driver.executeScript('mobile: activateApp', { appId })
     }
 
     async queryAppState(appId) {
-        return this.driver.executeScript('mobile: queryAppState', { appId });
+        return this.driver.executeScript('mobile: queryAppState', { appId })
     }
 
     async terminate(appId) {
-        return this.driver.executeScript('mobile: terminateApp', { appId });
+        return this.driver.executeScript('mobile: terminateApp', { appId })
     }
 
     async uninstall(appId) {
-        return this.driver.executeScript('mobile: removeApp', { appId });
+        return this.driver.executeScript('mobile: removeApp', { appId })
     }
 
     async clipboard() {
-        return Buffer.from(await this.driver.getClipboard(), 'base64').toString('ascii');
+        return Buffer.from(await this.driver.getClipboard(), 'base64').toString('ascii')
     }
 
     async startScreenRecording() {
-        return this.driver.executeScript('mobile: startScreenStreaming', {});
+        return this.driver.executeScript('mobile: startScreenStreaming', {})
     }
 
     async stopScreenRecording() {
-        return this.driver.executeScript('mobile: stopScreenStreaming', {});
+        return this.driver.executeScript('mobile: stopScreenStreaming', {})
     }
 
     async screenshot() {
-        return this.driver.takeScreenshot();
+        return this.driver.takeScreenshot()
     }
 
     async elementScreenshot(elementId) {
@@ -41,30 +41,30 @@ class Android extends ActionsBase {
         return this.driver.executeScript('mobile: clickGesture', {
             elementId,
             duration
-        });
+        })
     }
 
     async longtap(elementId, duration = 1600) {
         return this.driver.executeScript('mobile: longClickGesture', {
             elementId,
             duration
-        });
+        })
     }
 
     async write(elementId, value) {
-        return this.driver.elementSendKeys(elementId, value);
+        return this.driver.elementSendKeys(elementId, value)
     }
 
     async sendKeys(keys) {
-        return this.driver.executeScript('mobile: type', { keys });
+        return this.driver.executeScript('mobile: type', { keys })
     }
 
     async clear(elementId) {
-        return this.driver.elementClear(elementId);
+        return this.driver.elementClear(elementId)
     }
 
     async getAttribute(elementId, attribute) {
-        return this.driver.getElementAttribute(elementId, attribute);
+        return this.driver.getElementAttribute(elementId, attribute)
     }
 
     async dragAndDrop(elementId, fromX, fromY, toX, toY, speed = 1000) {
@@ -75,19 +75,19 @@ class Android extends ActionsBase {
             endX: toX,
             endY: toY,
             speed
-        });
+        })
     }
 
     async swipe(elementId, direction, percent = 0.8) {
         if (!["up", "down", "left", "right"].includes(direction)) {
-            throw new Error("Invalid swipe direction. Use 'up', 'down', 'left', or 'right'.");
+            throw new Error("Invalid swipe direction. Use 'up', 'down', 'left', or 'right'.")
         }
         
         return this.driver.executeScript('mobile: swipeGesture', {
             elementId,
             direction,
             percent
-        });
+        })
     }
 
     async scrollTo(elementId, strategy = 'accessibility id', maxSwipes = 10) {
@@ -95,16 +95,16 @@ class Android extends ActionsBase {
             elementId,
             strategy,
             maxSwipes
-        });
+        })
     }
 
     async deepLink(url) {
-        return this.driver.executeScript('mobile: deepLink', { url });
+        return this.driver.executeScript('mobile: deepLink', { url })
     }
 
     async pullFile(remotePath) {
-        return this.driver.executeScript('mobile: pullFile', { remotePath });
+        return this.driver.executeScript('mobile: pullFile', { remotePath })
     }
 }
 
-module.exports = Android;
+module.exports = Android
