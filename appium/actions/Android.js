@@ -17,6 +17,10 @@ class Android extends ActionsBase {
         return this.driver.executeScript('mobile: removeApp', { appId })
     }
 
+    async source() {
+        return this.driver.execute('mobile: source', { format: 'xml' });
+    }
+
     async clipboard() {
         return Buffer.from(await this.driver.getClipboard(), 'base64').toString('ascii')
     }
