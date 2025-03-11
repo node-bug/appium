@@ -1,6 +1,6 @@
 const appium = require('@nodebug/config')('appium')
 const device = require('@nodebug/config')('device')
-const iOS = require('./iOS')
+const iOS = require('./ios')
 const Android = require('./Android')
 const macOS = require('./macOS')
 
