@@ -1,3 +1,5 @@
+// cababilities/index.js
+
 const appium = require('@nodebug/config')('appium')
 const device = require('@nodebug/config')('device')
 const iOS = require('./ios')

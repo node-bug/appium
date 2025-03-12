@@ -1,5 +1,5 @@
 const device = require('@nodebug/config')('device')
-const iOS = require('./iOS')
+const iOS = require('./IOS')
 const macOS = require('./macOS')
 const Android = require('./Android')
 
@@ -17,7 +17,9 @@ function Selectors(platform = device.platform) {
       return new Android()
 
     default:
-      return new Error(`${platform} is not a known platform name. Known platforms are 'iOS', 'macOS' and 'Android'`)
+      return new Error(
+        `${platform} is not a known platform name. Known platforms are 'iOS', 'macOS' and 'Android'`,
+      )
   }
 }
 

@@ -1,3 +1,4 @@
+// actions/index.js
 const device = require('@nodebug/config')('device')
 const iOS = require('./iOS')
 const Android = require('./Android')

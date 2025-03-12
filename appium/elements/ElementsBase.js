@@ -1,3 +1,5 @@
+// elements/ElementsBase.js
+
 class ElementsBase {
   constructor(driver, selectors) {
     this._driver = driver
@@ -13,7 +15,17 @@ class ElementsBase {
   }
 
   getSelectors(obj) {
-    return this.selectors.getSelector(obj.id, obj.exact)
+    /* eslint-disable prefer-const */
+    let xpath = this.selectors.getSelector(obj.id, obj.exact)
+    /* eslint-enable prefer-const */
+    // if (obj.parent) {
+    //   Object.keys(xpath).forEach((key) => {
+    //     if (typeof xpath[key] === 'string') {
+    //       xpath[key] = `${xpath[key]}/..`
+    //     }
+    //   })
+    // }
+    return xpath
   }
 
   async addQualifiers(locator) {
@@ -95,6 +107,8 @@ class ElementsBase {
         'alert',
         'cell',
         'menuitem',
+        'progressbar',
+        'tab',
       ].includes(type)
     ) {
       tagnames = this.selectors.tagnames[type]
@@ -233,6 +247,8 @@ class ElementsBase {
           'alert',
           'cell',
           'menuitem',
+          'progressbar',
+          'tab',
         ].includes(item.type) &&
         item.matches.length < 1
       ) {
@@ -263,6 +279,8 @@ class ElementsBase {
           'alert',
           'cell',
           'menuitem',
+          'progressbar',
+          'tab',
         ].includes(item.type)
       ) {
         const elements = await this.relativeSearch(item)
@@ -327,6 +345,8 @@ class ElementsBase {
           'alert',
           'cell',
           'menuitem',
+          'progressbar',
+          'tab',
         ].includes(item.type)
       ) {
         const elements = await this.relativeSearch(item)

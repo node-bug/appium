@@ -1,3 +1,5 @@
+// device/index.js
+
 const appium = require('@nodebug/config')('appium')
 const device = require('@nodebug/config')('device')
 const iOS = require('./iOS')
@@ -18,7 +20,9 @@ function Device(server = appium, capability = device) {
       return new Android(server, capability)
 
     default:
-      return new Error(`${capability.platform} is not a known platform name. Known platforms are 'iOS', 'macOS' and 'Android'`)
+      return new Error(
+        `${capability.platform} is not a known platform name. Known platforms are 'iOS', 'macOS' and 'Android'`,
+      )
   }
 }
 

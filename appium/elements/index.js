@@ -1,3 +1,5 @@
+// element/index.js
+
 const device = require('@nodebug/config')('device')
 const iOS = require('./iOS')
 const macOS = require('./macOS')
@@ -17,7 +19,9 @@ function Elements(driver, platform = device.platform) {
       return new Android(driver)
 
     default:
-      return new Error(`${platform} is not a known platform name. Known platforms are 'iOS', 'macOS' and 'Android'`)
+      return new Error(
+        `${platform} is not a known platform name. Known platforms are 'iOS', 'macOS' and 'Android'`,
+      )
   }
 }
 

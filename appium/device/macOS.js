@@ -1,3 +1,5 @@
+// device/macOS.js
+
 const { log } = require('@nodebug/logger')
 const fs = require('fs')
 const DeviceBase = require('./DeviceBase')
