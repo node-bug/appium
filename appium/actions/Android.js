@@ -121,6 +121,15 @@ class Android extends ActionsBase {
     return this.driver.executeScript('mobile: deepLink', [{ url }])
   }
 
+  async pushFile(filePath, payLoad) {
+    return this.driver.executeScript('mobile: pushFile', [
+      {
+        remotePath: filePath,
+        payload: payLoad,
+      },
+    ])
+  }
+
   async pullFile(remotePath) {
     return this.driver.executeScript('mobile: pullFile', [{ remotePath }])
   }
