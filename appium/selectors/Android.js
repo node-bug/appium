@@ -35,32 +35,32 @@ class Android extends SelectorsBase {
     const str = this.matcher(attribute, exact)
     return {
       button: `//*[(${str}) and ${SelectorsBase.self(this.tagnames.button)}]`,
-      // dialog: `//*[(${str}) and ${SelectorsBase.self(this.tagnames.dialog)}]`,
-      // radio: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
-      //   this.tagnames.radiobutton,
-      // )}]`,
-      // image: `//*[(${str}) and ${SelectorsBase.self(this.tagnames.image)}]`,
-      // switch: `//*[(${str}) and ${SelectorsBase.self(
-      //   this.tagnames.switch,
-      // )} and @resource-id='Toggle']`,
-      // alert: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
-      //   this.tagnames.alert,
-      // )}]`,
-      // cell: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
-      //   this.tagnames.cell,
-      // )}]`,
-      // menuitem: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
-      //   this.tagnames.menuitem,
-      // )}]`,
+      dialog: `//*[(${str}) and ${SelectorsBase.self(this.tagnames.dialog)}]`,
+      radio: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
+        this.tagnames.radio,
+      )}]`,
+      image: `//*[(${str}) and ${SelectorsBase.self(this.tagnames.image)}]`,
+      switch: `//*[(${str}) and ${SelectorsBase.self(
+        this.tagnames.switch,
+      )} and @resource-id='Toggle']`,
+      alert: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
+        this.tagnames.alert,
+      )}]`,
+      cell: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
+        this.tagnames.cell,
+      )}]`,
+      menuitem: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
+        this.tagnames.menuitem,
+      )}]`,
       textbox: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
         this.tagnames.textbox,
       )}]`,
-      // progressbar: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
-      //   this.tagnames.progressbar,
-      // )}]`,
-      // tab: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
-      //   this.tagnames.tab,
-      // )}]`,
+      progressbar: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
+        this.tagnames.progressbar,
+      )}]`,
+      tab: `//*[(${str})]/ancestor-or-self::*[${SelectorsBase.self(
+        this.tagnames.tab,
+      )}]`,
       element: `//*[${str}]`,
     }
   }
