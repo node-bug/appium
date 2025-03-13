@@ -1,7 +1,7 @@
 // driver/Android.js
 
 const { log } = require('@nodebug/logger')
-const fs = require('fs')
+const fs = require('fs').promises
 const path = require('path')
 const Strategy = require('./Strategy')
 
