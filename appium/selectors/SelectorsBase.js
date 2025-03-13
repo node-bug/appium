@@ -1,3 +1,5 @@
+// selectors/SelectorsBase.js
+
 class SelectorsBase {
   constructor(attributes, tags) {
     this.attributes = attributes

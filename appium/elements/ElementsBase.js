@@ -1,3 +1,5 @@
+// elements/ElementsBase.js
+
 class ElementsBase {
   constructor(driver, selectors) {
     this._driver = driver
