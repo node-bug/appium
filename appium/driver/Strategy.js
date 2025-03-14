@@ -71,6 +71,11 @@ class Strategy {
     return this.relativePositioner('toRightOf')
   }
 
+  parentOf() {
+    this.stack.push({ parent: true })
+    return this
+  }
+
   atIndex(index) {
     if (typeof index !== 'number') {
       throw new TypeError(

@@ -43,6 +43,44 @@ class Android extends Strategy {
     return dataUrl
   }
 
+  element(data) {
+    const description = { exact: false, parent: false }
+    const newStack = []
+    do {
+      const item = this.stack.pop()
+
+      if (item) {
+        if (item.exact) {
+          description.exact = true
+        } else if (item.parent) {
+          description.parent = true
+        } else {
+          newStack.push(item)
+        }
+      }
+    } while (
+      this.stack.some(
+        (item) => item.type !== 'element' && (item.exact || item.parent),
+      )
+    )
+    if (newStack.length > 0) {
+      this.stack.push(...newStack)
+    }
+
+    const elementData = {
+      type: 'element',
+      id: data.toString(),
+      exact: description.exact,
+      parent: description.parent,
+      matches: [],
+      index: false,
+      visible: false,
+    }
+
+    this.stack.push(elementData)
+    return this
+  }
+
   async longtap() {
     this.message = this.messenger({ stack: this.stack, action: 'longtap' })
     this.stack[0].visible = true
@@ -289,10 +327,11 @@ class Android extends Strategy {
     this.message = this.messenger({ stack: this.stack, action: 'isSelected' })
     try {
       const locator = await this.finder()
-      const v = await this.device.actions.getAttribute(
-        locator.ELEMENT,
-        'selected',
-      )
+      const v =
+        (await this.device.actions.getAttribute(
+          locator.ELEMENT,
+          'selected',
+        )) === 'true'
       if (v) {
         log.info('Element is selected')
       } else {
@@ -413,7 +452,7 @@ class Android extends Strategy {
       'xpath',
       '(//android.view.View)[3]',
     )
-    await this.device.actions.swipe(element.elementId, 'down')
+    await this.device.actions.swipe(element.ELEMENT, 'down')
     await this.waitToRecover(this.RECOVERY_TIME)
     return true
   }
