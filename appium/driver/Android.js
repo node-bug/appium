@@ -1,20 +1,18 @@
 // driver/Android.js
 
 const { log } = require('@nodebug/logger')
-const fs = require('fs').promises
-const path = require('path')
 const Strategy = require('./Strategy')
 
 class Android extends Strategy {
   async initiate() {
     await this.device.stop()
     await this.device.start()
-    // await this.device.startScreenRecording()
+    await this.device.startScreenRecording()
     return true
   }
 
   async exit() {
-    // await this.device.stopScreenRecording()
+    await this.device.stopScreenRecording()
     await this.device.stop()
     return true
   }
@@ -602,60 +600,6 @@ class Android extends Strategy {
 
   //   return true
   // }
-
-  async pushFile(remotePath, folderName, fileName) {
-    this.message = this.messenger({ stack: this.stack, action: 'pushFile' })
-
-    try {
-      if (
-        !remotePath ||
-        typeof remotePath !== 'string' ||
-        remotePath.trim() === '' ||
-        remotePath.startsWith('/') ||
-        remotePath.endsWith('/')
-      ) {
-        throw new Error(
-          'Invalid remotePath provided. The remote path should not be empty, start or end with a slash (e.g., path/to/file)',
-        )
-      }
-
-      if (
-        !folderName ||
-        typeof folderName !== 'string' ||
-        folderName.trim() === '' ||
-        folderName.startsWith('/') ||
-        folderName.endsWith('/')
-      ) {
-        throw new Error(
-          'Invalid folder name provided. The folder name should not be empty, start or end with a slash (e.g., folder/folder)',
-        )
-      }
-
-      const fileExtensionRegex = /\.[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*$/
-      if (
-        !fileName ||
-        typeof fileName !== 'string' ||
-        fileName.trim() === '' ||
-        !fileExtensionRegex.test(fileName)
-      ) {
-        throw new Error(
-          'Invalid fileName provided. The file name should not be empty and must include a valid file extension (e.g., .txt, .jpg, .tar.gz)',
-        )
-      }
-
-      if (!fileName || typeof fileName !== 'string' || fileName.trim() === '') {
-        throw new Error('Invalid File Name provided')
-      }
-      const filepath = path.join(process.cwd(), `/${folderName}/`, fileName)
-      const fileBuffer = await fs.readFile(filepath)
-      const payLoad = fileBuffer.toString('base64')
-
-      await this.device.actions.pushFile(`${remotePath}/${fileName}`, payLoad)
-      return true
-    } catch (error) {
-      throw new Error(`Error pushing file: ${error.message}`)
-    }
-  }
 }
 
 module.exports = Android

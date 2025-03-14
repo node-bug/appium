@@ -1,7 +1,8 @@
 // device/Android.js
 
 const { log } = require('@nodebug/logger')
-const fs = require('fs')
+const fs = require('fs').promises
+const path = require('path')
 const DeviceBase = require('./DeviceBase')
 
 class Android extends DeviceBase {
@@ -53,6 +54,34 @@ class Android extends DeviceBase {
       log.error(err.stack)
       err.message = `Error while terminating the app ${appId}.\n${err.message}`
       throw err
+    }
+  }
+
+  async uninstall(packageName) {
+    const appId = packageName || this.capabilities['appium:appId']
+    if ([undefined, null].includes(appId)) {
+      throw new Error(
+        'PackageName should be passed as function parameter or should be declated in config file:device.json',
+      )
+    }
+    log.info(`Uninstalling app with package name ${appId}`)
+    try {
+      await this.actions.uninstall(appId)
+      await this.sleep(this.timeout * 200)
+      log.info(`App ${appId} is uninstalled`)
+      return true
+    } catch (err) {
+      if (this.driver !== undefined) {
+        log.error(`Error while uninstalling the app ${appId}`)
+        log.error(err.stack)
+        err.message = `Error while uninstalling the app ${appId}.\n${err.message}`
+        throw err
+      } else {
+        log.warn(
+          `Tried uninstalling the app ${appId}, but appium driver is not available or started.`,
+        )
+        return true
+      }
     }
   }
 
@@ -134,21 +163,74 @@ class Android extends DeviceBase {
     }
   }
 
-  async pullFile(packageName, path) {
+  async pullFile(packageName, filePath) {
     const appId = packageName || this.capabilities['appium:appId']
     if ([undefined, null].includes(appId)) {
       throw new Error(
-        'PackageName should be passed as function parameter or should be declated in config file:device.json',
+        'PackageName should be passed as function parameter or should be declared in config file:device.json',
       )
     }
     log.info(`Getting the file from path ${path}`)
     try {
-      return this.actions.pullFile(appId, path)
+      return this.actions.pullFile(appId, filePath)
     } catch (err) {
       const message = `Error while getting the file from path ${path} for app ${appId}.`
       log.error(message)
       err.message = `${message}\n${err.message}`
       throw err
+    }
+  }
+
+  async pushFile(remotePath, folderName, fileName) {
+    log.info(`Pushing the file to path ${remotePath}`)
+    try {
+      if (
+        !remotePath ||
+        typeof remotePath !== 'string' ||
+        remotePath.trim() === '' ||
+        remotePath.startsWith('/') ||
+        remotePath.endsWith('/')
+      ) {
+        throw new Error(
+          'Invalid remotePath provided. The remote path should not be empty, start or end with a slash (e.g., path/to/file)',
+        )
+      }
+
+      if (
+        !folderName ||
+        typeof folderName !== 'string' ||
+        folderName.trim() === '' ||
+        folderName.startsWith('/') ||
+        folderName.endsWith('/')
+      ) {
+        throw new Error(
+          'Invalid folder name provided. The folder name should not be empty, start or end with a slash (e.g., folder/folder)',
+        )
+      }
+
+      const fileExtensionRegex = /\.[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*$/
+      if (
+        !fileName ||
+        typeof fileName !== 'string' ||
+        fileName.trim() === '' ||
+        !fileExtensionRegex.test(fileName)
+      ) {
+        throw new Error(
+          'Invalid fileName provided. The file name should not be empty and must include a valid file extension (e.g., .txt, .jpg, .tar.gz)',
+        )
+      }
+
+      if (!fileName || typeof fileName !== 'string' || fileName.trim() === '') {
+        throw new Error('Invalid File Name provided')
+      }
+      const filepath = path.join(process.cwd(), `/${folderName}/`, fileName)
+      const fileBuffer = await fs.readFile(filepath)
+      const payLoad = fileBuffer.toString('base64')
+
+      await this.actions.pushFile(`${remotePath}/${fileName}`, payLoad)
+      return true
+    } catch (error) {
+      throw new Error(`Error pushing file: ${error.message}`)
     }
   }
 
