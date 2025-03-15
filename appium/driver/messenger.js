@@ -1,11 +1,17 @@
+// driver/messenger.js
+
 const { log } = require('@nodebug/logger')
 
 function messenger(a) {
   let message = ''
   if (
-    ['isVisible', 'isDisplayed', 'isNotDisplayed', 'isEnabled'].includes(
-      a.action,
-    )
+    [
+      'isVisible',
+      'isDisplayed',
+      'isNotDisplayed',
+      'isSelected',
+      'isEnabled',
+    ].includes(a.action)
   ) {
     message = `Checking `
   } else if (a.action === 'click') {
@@ -56,10 +62,15 @@ function messenger(a) {
         'alert',
         'cell',
         'menuitem',
+        'progressbar',
+        'tab',
       ].includes(obj.type)
     ) {
       if (obj.exact) {
         message += 'exact '
+      }
+      if (obj.parent) {
+        message += 'parent of '
       }
       message += `${obj.type} '${obj.id}' `
       if (obj.index) {
@@ -87,6 +98,12 @@ function messenger(a) {
     message += `to ${a.data} state`
   } else if (a.action === 'scrollIntoView') {
     message += `to be visible`
+  } else if (a.action === 'isSelected') {
+    message += `is selected`
+  } else if (a.action === 'scroll') {
+    message += `to be visible`
+  } else if (a.action === 'isChecked') {
+    message += `is checked`
   }
 
   log.info(message)

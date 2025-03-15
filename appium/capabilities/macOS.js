@@ -1,3 +1,5 @@
+// capabilities/macOS.js
+
 class macOS {
   static capabilities(server, capability) {
     const timeout = server.timeout || 10

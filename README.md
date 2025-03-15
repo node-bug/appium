@@ -44,6 +44,34 @@ Sdcard: 512 MB
 
 ## Debugging
 
+### 1. Address Security-Related Error
+
+Error Description:
+
+```WebDriverError: An unknown server-side error occurred while processing the command.
+Original error: Potentially insecure feature 'adb_screen_streaming' has not been enabled.
+If you want to enable this feature and accept the security ramifications, please do so by following the documented instructions at http://appium.io/docs/en/2.0/guides/security/
+```
+
+#### Fix:
+
+1. Allow insecure feature in Appium: When starting the Appium server, you need to use the --allow-insecure=adb_screen_streaming flag. This flag allows insecure features, including screen streaming.
+
+### 2. Error: "The 'gst-inspect-1.0' binary is not available in the PATH"
+
+Error Description:
+
+```WebDriverError: An unknown server-side error occurred while processing the command.
+Original error: The 'gst-inspect-1.0' binary is not available in the PATH on the host system.
+See https://gstreamer.freedesktop.org/documentation/installing/index.html for more details on how to install it.
+```
+
+#### Fix:
+
+1. Install GStreamer
+2. Add GStreamer to PATH if Necessary
+3. Restart the appium server
+
 ### launch.json
 
 Sample launch.json file for easily starting to debug the code on any device or configuration

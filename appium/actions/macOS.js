@@ -1,3 +1,4 @@
+// actions/macOS.js
 const ActionsBase = require('./ActionsBase')
 
 class macOS extends ActionsBase {

@@ -1,7 +1,9 @@
+// cababilities/index.js
+
 const appium = require('@nodebug/config')('appium')
 const device = require('@nodebug/config')('device')
-const iOS = require('./iOS')
-const Android = require('./Android')
+const iOS = require('./ios')
+const Android = require('./android')
 const macOS = require('./macOS')
 
 function Capabilities(server = appium, capability = device) {

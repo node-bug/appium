@@ -1,3 +1,5 @@
+// cababilities/ios.js
+
 class iOS {
   static capabilities(server, capability) {
     const deviceName = capability.deviceName || 'iPhone 12'

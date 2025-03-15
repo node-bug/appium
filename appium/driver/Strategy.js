@@ -1,3 +1,5 @@
+// driver/Strategy.js
+
 const { log } = require('@nodebug/logger')
 const Device = require('../device')
 const Toggle = require('../toggle')
@@ -67,6 +69,11 @@ class Strategy {
 
   toRightOf() {
     return this.relativePositioner('toRightOf')
+  }
+
+  parentOf() {
+    this.stack.push({ parent: true })
+    return this
   }
 
   atIndex(index) {

@@ -1,3 +1,5 @@
+// selectors/SelectorsBase.js
+
 class SelectorsBase {
   constructor(attributes, tags) {
     this.attributes = attributes
@@ -18,6 +20,8 @@ class SelectorsBase {
       search: this.tags.search,
       textfield: this.tags.textfield,
       textbox: [].concat.apply([], [this.tags.textfield, this.tags.search]),
+      progressbar: this.tags.progressbar,
+      tab: this.tags.tab,
     }
   }
 
